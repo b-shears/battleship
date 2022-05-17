@@ -15,6 +15,7 @@ RSpec.describe Ship do
     expect(@cruiser.name).to eq("Cruiser")
 
   end
+
   it 'has a length' do
     expect(@cruiser.length).to eq(3)
   end
@@ -22,7 +23,14 @@ RSpec.describe Ship do
   it 'has a health value' do
     expect(@cruiser.health).to eq(3)
   end
+
   it 'has been sunk?' do
     expect(@cruiser.sunk?).to be(false)
-  end 
+  end
+
+  it 'can hit the ship' do
+    @cruiser.hit
+
+    expect(@cruiser.health).to be(2)
+  end
 end

@@ -12,4 +12,6 @@ class Ship
     @health == 0
 
   end
+
+  
 end
