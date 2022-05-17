@@ -13,5 +13,11 @@ class Ship
 
   end
 
-  
+  def hit
+    @health -= 1
+
+    #return @health
+  end
+
+
 end

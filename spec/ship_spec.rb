@@ -31,6 +31,6 @@ RSpec.describe Ship do
   it 'can hit the ship' do
     @cruiser.hit
 
-    expect(@cruiser.health).to be(2)
+    expect(@cruiser.health).to eq(2)
   end
 end
