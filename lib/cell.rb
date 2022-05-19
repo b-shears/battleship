@@ -17,11 +17,11 @@ class Cell
   end
 
   def fired_upon?
-    if @ship == nil
-      "."
-    else
+    # if @ship = nil
+    #   "."
+    # else
     @ship.length != @ship.health
-  end
+
 
   end
 
@@ -30,8 +30,8 @@ class Cell
   end
 
   def render
-  
-    if fired_upon? == false
+
+    if empty? == true || fired_upon? == false
       "."
     end
   end
