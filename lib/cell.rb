@@ -8,5 +8,9 @@ class Cell
     @ship = ship
   end
 
+  def empty?
+    @ship == nil
+  end
+
 
 end
