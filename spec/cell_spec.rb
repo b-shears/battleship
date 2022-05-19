@@ -5,7 +5,7 @@ require './lib/cell'
 RSpec.describe Cell do
   describe 'Iteration 1' do
     before :each do
-      @cell
+      @cell = Cell.new("B4")
     end
 
     it 'exists' do
@@ -14,6 +14,10 @@ RSpec.describe Cell do
 
     it 'has attributes' do
       expect(@cell.coordinate).to eq("B4")
+    end
+
+    it 'has no ship in cell' do
+      expect(@cell.ship).to eq(nil)
     end
 
   end
