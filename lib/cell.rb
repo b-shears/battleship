@@ -37,13 +37,9 @@ class Cell
     end
   end
 
-
-
   def render
-
-    if empty? || @fired_upon
+    if empty? && @fired_upon == false
       "."
-
     elsif empty? == true && @fired_upon == true
       "M"
     end
