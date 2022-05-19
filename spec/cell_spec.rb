@@ -63,10 +63,16 @@ RSpec.describe Cell do
           expect(@cell_1.render).to eq(".")
         end
 
-        it ' can fire upon a cell' do
+        it 'can fire upon a cell' do
           @cell_1.fire_upon
 
           expect(@cell_1.render).to eq("M")
+        end
+
+        it 'can place a ship in another cell' do
+          @cell_2.place_ship(@cruiser)
+
+          expect(@cell_2.render).to eq(".")
         end
 
 
