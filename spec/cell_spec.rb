@@ -43,13 +43,13 @@ RSpec.describe Cell do
         expect(@cell.fired_upon?).to eq(false)
       end
 
-      it 'can fire upon a ship' do
-
-      end
-
-      it 'can tell the ships health' do
-
-      end
+      # xit 'can fire upon a ship' do
+      #
+      # end
+      #
+      # xit 'can tell the ships health' do
+      #
+      # end
 
     end
 
