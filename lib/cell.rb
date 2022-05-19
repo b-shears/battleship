@@ -38,10 +38,10 @@ class Cell
   end
 
   def render
-    if empty? && @fired_upon == false
-      "."
-    elsif empty? == true && @fired_upon == true
+    if empty? && @fired_upon == true
       "M"
+    elsif empty? || @fired_upon == false
+      "."
     end
   end
 end
