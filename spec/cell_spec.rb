@@ -63,7 +63,7 @@ RSpec.describe Cell do
           expect(@cell_1.render).to eq(".")
         end
 
-        xit ' can fire upon a cell' do
+        it ' can fire upon a cell' do
           @cell_1.fire_upon
 
           expect(@cell_1.render).to eq("M")

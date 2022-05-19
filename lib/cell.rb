@@ -41,10 +41,10 @@ class Cell
 
   def render
 
-    if empty? == true || fired_upon? == false
+    if empty? || @fired_upon
       "."
 
-    elsif empty? == true
+    elsif empty? == true && @fired_upon == true
       "M"
     end
   end
