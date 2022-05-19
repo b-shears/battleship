@@ -40,7 +40,7 @@ RSpec.describe Cell do
       it 'can tell if a ship has been fired upon' do
         @cell.place_ship(@cruiser)
 
-        expect(@cell.fired_upon?).to eq(false)
+        expect(@cell.fired_upon).to eq(false)
       end
 
       it 'can fire upon a ship' do
@@ -48,14 +48,12 @@ RSpec.describe Cell do
         @cell.fire_upon
 
         expect(@cell.ship.health).to eq(2)
-        expect(@cell.fired_upon?).to eq(true)
+        expect(@cell.fired_upon).to eq(true)
       end
 
       describe 'render' do
 
         before :each do
-          @cell.place_ship(@cruiser)
-          @cell.fire_upon
           @cell_1 = Cell.new("B4")
           @cell_2 = Cell.new("C3")
         end
@@ -65,7 +63,7 @@ RSpec.describe Cell do
           expect(@cell_1.render).to eq(".")
         end
 
-        it ' can fire upon a cell' do
+        xit ' can fire upon a cell' do
           @cell_1.fire_upon
 
           expect(@cell_1.render).to eq("M")
