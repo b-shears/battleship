@@ -17,12 +17,23 @@ class Cell
   end
 
   def fired_upon?
+    if @ship == nil
+      "."
+    else
     @ship.length != @ship.health
+  end
+
   end
 
   def fire_upon
     @ship.hit
   end
 
+  def render
+  
+    if fired_upon? == false
+      "."
+    end
+  end
 
 end
