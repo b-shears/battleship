@@ -24,12 +24,33 @@ RSpec.describe Cell do
       expect(@cell.empty?).to eq(true)
     end
 
-    it 'can place a ship' do
-      cruiser = Ship.new("Cruiser", 3)
-      @cell.place_ship(cruiser)
+    describe 'robust tests' do
 
-      expect(@cell.ship(cruiser)).to eq(cruiser)
-      expect(@cell.empty?).to eq(false)
+      before :each do
+        @cruiser = Ship.new("Cruiser", 3)
+      end
+
+      it 'can place a ship' do
+        @cell.place_ship(@cruiser)
+
+        expect(@cell.ship).to eq(@cruiser)
+        expect(@cell.empty?).to eq(false)
+      end
+
+      it 'can tell if a ship has been fired upon' do
+        @cell.place_ship(@cruiser)
+
+        expect(@cell.fired_upon?).to eq(false)
+      end
+
+      it 'can fire upon a ship' do
+
+      end
+
+      it 'can tell the ships health' do
+
+      end
+
     end
 
   end
