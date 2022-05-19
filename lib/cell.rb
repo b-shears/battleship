@@ -19,6 +19,10 @@ class Cell
     @ship = ship_name
   end
 
+  def fired_upon?
+    @fire_upon
+  end
+
   # def fired_upon?
   #   # if @ship = nil
   #   #   "."
@@ -37,11 +41,12 @@ class Cell
     end
   end
 
-  def render
+  def render(display_ship = false)
     if empty? && @fired_upon == true
       "M"
     elsif empty? || @fired_upon == false
       "."
+    else empty? == false && @fired_upon = false
     end
   end
 end
