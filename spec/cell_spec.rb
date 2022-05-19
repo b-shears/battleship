@@ -28,7 +28,7 @@ RSpec.describe Cell do
       cruiser = Ship.new("Cruiser", 3)
       @cell.place_ship(cruiser)
 
-      expect(@cell.ship).to eq(cruiser)
+      expect(@cell.ship(cruiser)).to eq(cruiser)
       expect(@cell.empty?).to eq(false)
     end
 
