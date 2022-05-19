@@ -12,5 +12,9 @@ class Cell
     @ship == nil
   end
 
+  def place_ship(ship_name)
+    @ship = ship_name
+  end
+
 
 end
