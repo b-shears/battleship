@@ -63,11 +63,14 @@ RSpec.describe Cell do
         it 'renders' do
 
           expect(@cell_1.render).to eq(".")
-
         end
-        #xit 'can tell the ships health' do
-        #
-        # end
+
+        it ' can fire upon a cell' do
+          @cell_1.fire_upon
+
+          expect(@cell_1.render).to eq("M")
+        end
+
 
       end
 
