@@ -40,8 +40,13 @@ class Cell
       "M"
     elsif empty? || @fired_upon == false
       "."
-    elsif empty? == false && @fired_upon == true
+    elsif ship.sunk? == true
+      "X"
+    else empty? == false && @fired_upon == true
       "H"
+    # else
+    #   "H"
+
     end
 
 
