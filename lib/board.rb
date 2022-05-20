@@ -21,9 +21,14 @@ def initialize
   }
 end
 
-def valid_coordinate?
+def valid_coordinate?(coordinate)
 
-end
-
+  @cells.keys.each do |cell|
+    if cell == coordinate
+      return true
+    end
+    end
+    false
+  end
 
 end
