@@ -21,7 +21,9 @@ def initialize
   }
 end
 
+def valid_coordinate?
 
+end
 
 
 end
