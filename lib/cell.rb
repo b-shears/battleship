@@ -23,15 +23,6 @@ class Cell
     @fire_upon
   end
 
-  # def fired_upon?
-  #   # if @ship = nil
-  #   #   "."
-  #   # else
-  #   @ship.length != @ship.health
-  #   end
-
-
-
   def fire_upon
     @fired_upon = true
     if empty? == false

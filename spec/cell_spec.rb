@@ -75,6 +75,14 @@ RSpec.describe Cell do
           expect(@cell_2.render).to eq(".")
         end
 
+        it 'displays a ship' do
+
+          expect(@cell_2.render).to eq("S")
+
+        end
+
+
+
 
 
 
