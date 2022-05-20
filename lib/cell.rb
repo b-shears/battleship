@@ -20,7 +20,7 @@ class Cell
   end
 
   def fired_upon?
-    @fire_upon
+    @fired_upon
   end
 
   def fire_upon
@@ -33,11 +33,15 @@ class Cell
   end
 
   def render(display_ship = false)
-    if empty? && @fired_upon == true
+
+    if display_ship == true && empty? == false && @fired_upon == false
+      "S"
+   elsif empty? && @fired_upon == true
       "M"
     elsif empty? || @fired_upon == false
       "."
-    else empty? == false && @fired_upon = false
     end
+    
+
   end
 end

@@ -76,8 +76,9 @@ RSpec.describe Cell do
         end
 
         it 'displays a ship' do
+          @cell_2.place_ship(@cruiser)
 
-          expect(@cell_2.render).to eq("S")
+          expect(@cell_2.render(true)).to eq("S")
 
         end
 
