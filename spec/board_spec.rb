@@ -11,9 +11,11 @@ RSpec.describe Board do
     end
     it 'exists' do
       expect(@board).to be_a(Board)
+
     end
-    xit 'has attributes' do
-      expect(@board.cells).to eq()
+    it 'has cells' do
+      expect(@board.cells).to be_a(Hash)
+
     end
   end
 end
