@@ -40,8 +40,10 @@ class Cell
       "M"
     elsif empty? || @fired_upon == false
       "."
+    elsif empty? == false && @fired_upon == true
+      "H"
     end
-    
+
 
   end
 end
