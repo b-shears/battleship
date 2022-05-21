@@ -80,4 +80,9 @@ class Board
     #all? true true is yes
   end
 
+  def place(ship, coordinates)
+    
+
+  end
+
 end
