@@ -22,11 +22,11 @@ class Board
   end
 
   def valid_coordinate?(coordinate)
-    if @cells[coordinate]
-      true
-    else
-      false
-    end
+      if @cells[coordinate]
+        true
+      else
+        false
+      end
   end
 
   def valid_placement?(ship, coordinates)
@@ -52,9 +52,10 @@ class Board
 
     if letters.uniq.length == 1 #letters are the same
       #are numbers consecutive? returns true/false
-      number_consecutive = numbers.each_cons(2).all? do |a, b|
+      number_consecutive = numbers.each_cons(2).all? do |a,b|
          a + 1 == b
       end
+
     elsif numbers.uniq.length == 1 #numbers are same
       letter_consecutive = letters.each_cons(2).all? do |a,b|
         a + 1 == b
@@ -62,11 +63,6 @@ class Board
     else
       false
     end
-
-    #are letters consecutive? return true/false
-
-
-
     #[1,2,4]
     #each_cons gives us [[1,2][2,4]]
     #first time through [1,2]
