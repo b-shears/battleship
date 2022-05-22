@@ -6,14 +6,17 @@ class Board
        "A2" => Cell.new("A2"),
        "A3" => Cell.new("A3"),
        "A4" => Cell.new("A4"),
+
        "B1" => Cell.new("B1"),
        "B2" => Cell.new("B2"),
        "B3" => Cell.new("B3"),
        "B4" => Cell.new("B4"),
+
        "C1" => Cell.new("C1"),
        "C2" => Cell.new("C2"),
        "C3" => Cell.new("C3"),
        "C4" => Cell.new("C4"),
+
        "D1" => Cell.new("D1"),
        "D2" => Cell.new("D2"),
        "D3" => Cell.new("D3"),
@@ -97,7 +100,20 @@ class Board
     end
   end
 
-  def render
+  def render(display_ship = false)
+    board_rendering = ["  1 2 3 4"]
+
+    @cells.each_with_index do |cell, index|
+      if index % 4 == 0
+        board_rendering << " \n#{cell[0][0]}"
+      end
+
+      board_rendering << " #{cell[1].render(display_ship)}"
+    end
+    
+    board_rendering << " \n"
+
+    board_rendering.join
 
   end
 
