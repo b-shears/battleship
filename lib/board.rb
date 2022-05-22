@@ -22,11 +22,11 @@ class Board
   end
 
   def valid_coordinate?(coordinate)
-      if @cells[coordinate]
-        true
-      else
-        false
-      end
+    if @cells[coordinate]
+      true
+    else
+      false
+    end
   end
 
   def valid_placement?(ship, coordinates)
@@ -61,9 +61,9 @@ class Board
       letter_consecutive = letters.each_cons(2).all? do |a,b|
         a + 1 == b
       end
-    else
-      false
-    end
+      else
+        false
+      end
     #[1,2,4]
     #each_cons gives us [[1,2][2,4]]
     #first time through [1,2]
@@ -82,23 +82,24 @@ class Board
   end
 
   def overlapping_ships?(ship, coordinates)
-        initial_state = true
-      coordinates.each do |coordinate|
-        if !@cells[coordinate].empty?
-          initial_state = false
-        end
-
+    initial_state = true
+    coordinates.each do |coordinate|
+      if !@cells[coordinate].empty?
+        initial_state = false
       end
-        initial_state
+    end
+    initial_state
   end
 
   def place(ship, coordinates)
     coordinates.each do |coordinate|
       @cells[coordinate].place_ship(ship)
-      end
-
+    end
   end
 
+  def render
+
+  end
 
 
 end
