@@ -9,7 +9,6 @@ RSpec.describe Board do
       @board = Board.new
       @cruiser = Ship.new("Cruiser", 3)
       @submarine = Ship.new("Submarine", 2)
-
     end
 
     it 'exists' do
@@ -43,7 +42,7 @@ RSpec.describe Board do
       expect(@board.valid_placement?(@submarine, ["C1", "B1"])).to eq(false)
     end
 
-    it 'cant be diagnol' do
+    it 'cant be diagonal' do
       expect(@board.valid_placement?(@cruiser, ["A1", "B2", "C3"])).to eq(false)
       expect(@board.valid_placement?(@submarine, ["C2", "D3"])).to eq(false)
     end
@@ -52,6 +51,7 @@ RSpec.describe Board do
       expect(@board.valid_placement?(@cruiser, ["B1", "C1", "D1"])).to eq(true)
       expect(@board.valid_placement?(@cruiser, ["A1", "D1", "C1"])).to eq(false)
     end
+
     it 'can place a ship' do
       @board.place(@cruiser, ["A1", "A2", "A3"])
       @cell_1 = @board.cells["A1"]
@@ -61,17 +61,19 @@ RSpec.describe Board do
       expect(@cell_2.ship).to eq(@cruiser)
       expect(@cell_3.ship).to eq(@cruiser)
       expect(@cell_3.ship).to eq(@cell_2.ship)
-
     end
 
     it 'can place ships so they do not overlap' do
       @board.place(@cruiser, ["A1", "A2", "A3"])
-      @cell_1 = @board.cells["A1"]
-      @cell_2 = @board.cells["A2"]
-      @cell_3 = @board.cells["A3"]
 
-     expect(@board.valid_placement?(@submarine, ["A1", "B1"])).to eq(false)
+      expect(@board.valid_placement?(@submarine, ["A1", "B1"])).to eq(false)
+    end
 
+    it 'can render a board' do
+      @board.place(@cruiser, ["A1", "A2", "A3"])
+
+      expect(@board.render).to eq("  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
+      expect(@board.render(true)).to eq("  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
     end
   end
 end

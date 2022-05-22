@@ -59,7 +59,6 @@ RSpec.describe Cell do
         end
 
         it 'renders' do
-
           expect(@cell_1.render).to eq(".")
         end
 
@@ -101,16 +100,10 @@ RSpec.describe Cell do
           expect(@cell_2.render).to eq("X")
         end
 
-
-
-
-
-
-
-
       end
 
     end
+
   end
 
 end
