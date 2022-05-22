@@ -31,7 +31,8 @@ class Board
 
   def valid_placement?(ship, coordinates)
     valid_length(ship, coordinates) &&
-    consecutive_coordinates(coordinates)
+    consecutive_coordinates(coordinates) &&
+    overlapping_ships?(ship, coordinates)
   end
 
   def valid_length(ship, coordinates)
@@ -80,6 +81,17 @@ class Board
     #all? true true is yes
   end
 
+  def overlapping_ships?(ship, coordinates)
+        initial_state = true
+      coordinates.each do |coordinate|
+        if !@cells[coordinate].empty?
+          initial_state = false
+        end
+
+      end
+        initial_state
+  end
+
   def place(ship, coordinates)
     coordinates.each do |coordinate|
       @cells[coordinate].place_ship(ship)
@@ -87,6 +99,6 @@ class Board
 
   end
 
-  
+
 
 end
