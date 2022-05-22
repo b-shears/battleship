@@ -110,12 +110,18 @@ class Board
 
       board_rendering << " #{cell[1].render(display_ship)}"
     end
-    
+
     board_rendering << " \n"
 
     board_rendering.join
 
+    #another way
+    # def render(display = false)
+    # "  1 2 3 4 \n"+
+    # "A #{@cells["A1"].render(display)} #{@cells["A2"].render(display)} #{@cells["A3"].render(display)} #{@cells["A4"].render(display)}" +
+    # "B #{@cells["B1"].render(display)} #{@cells["B2"].render(display)} #{@cells["B3"].render(display)} #{@cells["B4"].render(display)}" +
+    # "C #{@cells["C1"].render(display)} #{@cells["C2"].render(display)} #{@cells["C3"].render(display)} #{@cells["C4"].render(display)}" +
+    # "D #{@cells["D1"].render(display)} #{@cells["D2"].render(display)} #{@cells["D3"].render(display)} #{@cells["D4"].render(display)}"
   end
-
 
 end

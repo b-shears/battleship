@@ -8,7 +8,6 @@ class Cell
     @coordinate = coordinate
     @ship = ship
     @fired_upon = false
-
   end
 
   def empty?
@@ -33,8 +32,7 @@ class Cell
   end
 
   def render(display_ship = false)
-    return "." if display_ship == false
-
+    # return "." if display_ship == false
     if display_ship == true && empty? == false && @fired_upon == false
       "S"
    elsif empty? && @fired_upon == true
@@ -47,9 +45,8 @@ class Cell
       "H"
     # else
     #   "H"
-
     end
 
-
   end
+
 end
