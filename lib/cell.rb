@@ -33,6 +33,7 @@ class Cell
   end
 
   def render(display_ship = false)
+    return "." if display_ship == false
 
     if display_ship == true && empty? == false && @fired_upon == false
       "S"
