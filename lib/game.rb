@@ -9,12 +9,12 @@ class Game
   end
 
   def start
-    puts " Welcome to BATTLESHIP"
+    puts "Welcome to BATTLESHIP"
     puts "Enter p to play. Enter q to quit."
     input = gets.chomp.downcase
-      if input != "p"
+      if input == "q"
         puts "You selected #{input}. Later Loser!"
-      elseif input == "p"
+      elsif input == "p"
         puts "Game On!"
         puts "I have laid out my ships on the grid."
         puts "You now need to lay out your two ships."
