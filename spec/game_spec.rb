@@ -8,7 +8,6 @@ RSpec.describe Game do
   describe 'Iteration 1' do
     before :each do
       @game = Game.new
-
     end
 
     it 'exists' do
@@ -19,6 +18,8 @@ RSpec.describe Game do
       expect(@game.player_board).to be_a(Board)
       expect(@game.computer_board).to be_a(Board)
     end
+
+
 
   end
 end
