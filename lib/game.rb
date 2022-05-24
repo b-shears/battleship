@@ -27,7 +27,13 @@ class Game
     computer_ship_placement
     player_ship_placement
 
-    #user/computer turns go here
+    #turns
+    display
+    player_shot
+    display
+    # computer_shot   #loop until sunk
+    # display
+
 
     end
   end
@@ -60,7 +66,6 @@ class Game
     puts '>'
     x = gets.chomp.upcase.split
 
-    # require 'pry'; binding.pry
     until @player_board.valid_coordinate?(x[0]) && @player_board.valid_coordinate?(x[1]) && @player_board.valid_coordinate?(x[2]) && @player_board.valid_placement?(@cruiser, x)
       puts "Those are invalid coordinates. Please try again:"
       x = gets.chomp.upcase.split
@@ -81,7 +86,29 @@ class Game
     puts @player_board.render(true)
   end
 
-#turns
+  def display
+    puts `clear`
+    puts "=============COMPUTER BOARD============="
+    puts @computer_board.render
+    puts "==============PLAYER BOARD=============="
+    puts @player_board.render(true)
+  end
+
+  def player_shot
+    puts "Enter the coordinate for your shot:"
+    coordinate = gets.chomp.upcase
+
+    # until #valid coord
+    @computer_board.cells[coordinate].fire_upon
+  end
+
+  def computer_shot
+    puts "Enter the coordinate for your shot:"
+    coordinate = #sample
+    @player_board.cells[coordinate].fire_upon
+  end
+
+
 
 end # <= this one ends the whole class
 #=====================================================================================================
