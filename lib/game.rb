@@ -11,40 +11,78 @@ class Game
   end
 
   def start
-    puts "Welcome to BATTLESHIP"
-    puts "Enter p to play. Enter q to quit."
+  puts `clear`
+  puts "Welcome to BATTLESHIP"
+  puts "Enter p to play. Enter q to quit."
 
-    input = gets.chomp.downcase
+  input = gets.chomp.downcase
 
-      if input == "q"
-        puts "You selected #{input}. Later Loser!"
+  if input == "q"
+    puts `clear`
+    puts "You selected #{input}. Walk the Plank!"
 
-      elsif input == "p"
-        puts "Game On!"
-      end
+  elsif input == "p"
+    puts `clear`
+    puts "Game On!"
+    computer_ship_placement
+    player_ship_placement
+
+    #user/computer turns go here
   end
-
-  def computer_ship_placement
-
-
-      x = @computer_board.cells.keys.sample(@cruiser.length)
-      until @computer_board.valid_placement?(@cruiser, x) == true do
-      x = @computer_board.cells.keys.sample(@cruiser.length)
-
-
-  end
-
-          @computer_board.place(@cruiser, x)
-
-        x = @computer_board.cells.keys.sample(@submarine.length)
-        until @computer_board.valid_placement?(@submarine, x) == true do
-        x = @computer_board.cells.keys.sample(@submarine.length)
-
-      end
-        @computer_board.place(@submarine, x)
 end
 
-#   def player_ship_placement
+def computer_ship_placement
+
+  x = @computer_board.cells.keys.sample(@cruiser.length)
+
+  until @computer_board.valid_placement?(@cruiser, x) == true do
+    x = @computer_board.cells.keys.sample(@cruiser.length)
+  end
+
+  @computer_board.place(@cruiser, x)
+
+  x = @computer_board.cells.keys.sample(@submarine.length)
+
+  until @computer_board.valid_placement?(@submarine, x) == true do
+    x = @computer_board.cells.keys.sample(@submarine.length)
+  end
+
+  @computer_board.place(@submarine, x)
+end
+
+
+
+# def player_ship_placement
+  # puts "I have laid out my ships on the grid."
+ #     puts "You now need to lay out your two ships."
+ #     puts "The Cruiser is three units long and the Submarine is two units long."
+ #     puts @player_board.render
+ #     puts "Enter the squares for the Cruiser (3 spaces):"
+#     puts '>'
+#  x = gets.chomp.join("")
+
+#  until valid_placement(ship, x) == true
+#    "invalid coordinate message"
+#    x = gets.chomp.join("")
+
+# => player_board.place_ship(@cruiser, x)
+# board.render
+
+# puts "Enter the squares for the Submarine (2 spaces):"
+
+# repeat for submarine to match IP
+# loop on 64 checks for invalid/prompts to try again (thanks team)
+
+# end
+
+#turns
+
+
+end # <= this one ends the whole class
+#=====================================================================================================
+#   old material
+
+# def player_ship_placement
 #
 #     puts "I have laid out my ships on the grid."
 #     puts "You now need to lay out your two ships."
@@ -94,4 +132,3 @@ end
 #     #
 #     #   end
 #     end
-end
