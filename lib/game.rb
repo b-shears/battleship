@@ -27,14 +27,12 @@ class Game
     computer_ship_placement
     player_ship_placement
 
-    #turns
+    #turns, loop until win (later)
     display
     player_shot
+    computer_shot
     display
-    # computer_shot   #loop until sunk
-    # display
-
-
+    # ish works up to this point
     end
   end
 
@@ -84,10 +82,10 @@ class Game
 
     @player_board.place(@submarine, y)
     puts @player_board.render(true)
+    puts `clear`
   end
 
   def display
-    puts `clear`
     puts "=============COMPUTER BOARD============="
     puts @computer_board.render
     puts "==============PLAYER BOARD=============="
@@ -100,15 +98,34 @@ class Game
 
     # until #valid coord
     @computer_board.cells[coordinate].fire_upon
+    if @player_board.cells[coordinate].empty?
+      answer = "miss"
+    else
+      answer = "hit"
+    end
+
+    puts "Your shot on #{coordinate} was a #{answer}."
+    sleep(3)
+    puts `clear`
   end
 
   def computer_shot
-    puts "Enter the coordinate for your shot:"
-    coordinate = #sample
+    coordinate = @player_board.cells.keys.sample
+    until @player_board.cells[coordinate].fired_upon? == false do
+      coordinate = @player_board.cells.keys.sample
+    end
     @player_board.cells[coordinate].fire_upon
+
+    if @player_board.cells[coordinate].empty?
+      answer = "miss"
+    else
+      answer = "hit"
+    end
+
+    puts `clear`
+    puts "My shot on #{coordinate} was a #{answer}."
+
   end
-
-
 
 end # <= this one ends the whole class
 #=====================================================================================================
