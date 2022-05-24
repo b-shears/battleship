@@ -25,55 +25,63 @@ class Game
     puts `clear`
     puts "Game On!"
     computer_ship_placement
+
     player_ship_placement
 
     #user/computer turns go here
+    end
   end
-end
 
-def computer_ship_placement
+  def computer_ship_placement
 
-  x = @computer_board.cells.keys.sample(@cruiser.length)
-
-  until @computer_board.valid_placement?(@cruiser, x) == true do
     x = @computer_board.cells.keys.sample(@cruiser.length)
-  end
 
-  @computer_board.place(@cruiser, x)
+    until @computer_board.valid_placement?(@cruiser, x) == true do
+      x = @computer_board.cells.keys.sample(@cruiser.length)
+    end
 
-  x = @computer_board.cells.keys.sample(@submarine.length)
+    @computer_board.place(@cruiser, x)
 
-  until @computer_board.valid_placement?(@submarine, x) == true do
     x = @computer_board.cells.keys.sample(@submarine.length)
+
+    until @computer_board.valid_placement?(@submarine, x) == true do
+      x = @computer_board.cells.keys.sample(@submarine.length)
+    end
+
+    @computer_board.place(@submarine, x)
   end
 
-  @computer_board.place(@submarine, x)
-end
 
 
+  def player_ship_placement
+    puts "I have laid out my ships on the grid."
+    puts "You now need to lay out your two ships."
+    puts "The Cruiser is three units long and the Submarine is two units long."
+    puts @player_board.render
+    puts "Enter the squares for the Cruiser (3 spaces):"
+    puts '>'
+    x = gets.chomp.upcase.split
 
-# def player_ship_placement
-  # puts "I have laid out my ships on the grid."
- #     puts "You now need to lay out your two ships."
- #     puts "The Cruiser is three units long and the Submarine is two units long."
- #     puts @player_board.render
- #     puts "Enter the squares for the Cruiser (3 spaces):"
-#     puts '>'
-#  x = gets.chomp.join("")
+    until @player_board.valid_placement?(@cruiser, x) == true
+      puts "Those are invalid coordinates. Please try again:"
+      x = gets.chomp.upcase.split
+    end
 
-#  until valid_placement(ship, x) == true
-#    "invalid coordinate message"
-#    x = gets.chomp.join("")
+    @player_board.place(@cruiser, x)
+    puts @player_board.render(true)
 
-# => player_board.place_ship(@cruiser, x)
-# board.render
+    puts "Enter the squares for the Submarine (2 spaces):"
+    y = gets.chomp.upcase.split
 
-# puts "Enter the squares for the Submarine (2 spaces):"
+    until @player_board.valid_placement?(@submarine, y) == true
+      puts "Those are invalid coordinates. Please try again:"
+      y = gets.chomp.upcase.split
+    end
 
-# repeat for submarine to match IP
-# loop on 64 checks for invalid/prompts to try again (thanks team)
+    @player_board.place(@submarine, y)
+    puts @player_board.render(true)
 
-# end
+  end
 
 #turns
 
@@ -82,50 +90,6 @@ end # <= this one ends the whole class
 #=====================================================================================================
 #   old material
 
-# def player_ship_placement
-#
-#     puts "I have laid out my ships on the grid."
-#     puts "You now need to lay out your two ships."
-#     puts "The Cruiser is three units long and the Submarine is two units long."
-#     puts @player_board.render
-#     puts "Enter the squares for the Cruiser (3 spaces):"
-#     puts ">" "A1", "A2", "A3"
-#
-#         @coordinate_array = []
-#         coordinate_1 = gets.chomp.upcase
-#
-#         if valid_input?(coordinate_1)
-#           @coordinate_array << coordinate_1
-#         else
-#           puts "Incorrect coordinate, please enter valid coordinate for #{coordinate_1}"
-#
-#         end
-#
-#     #     coordinate_2 = gets.chomp.upcase
-#     #
-#     #     if valid_input?(coordinate_2)
-#     #       @coordinate_array << coordinate_2
-#     #     else
-#     #       puts "Incorrect coordinate, please enter valid coordinate for #{coordinate_2}"
-#     #
-#     #     end
-#     #
-#     #     coordinate_3 = gets.chomp.upcase
-#     #
-#     #     if valid_input?(coordinate_3)
-#     #       @coordinate_array << coordinate_3
-#     #     else
-#     #       puts "Incorrect coordinate, please enter valid coordinate for #{coordinate_3}"
-#     #
-#     #     end
-#     #
-#     #       @player_board.valid_placement?(cruiser, ["A1", " ", " "])
-#     #         puts "You selected #{input}. Invalid Input."
-#     #     # coordinate_2 = gets.chomp.upcase
-#     #     # puts ">"
-#     #     # coordinate_3 = gets.chomp.upcase
-#     #
-#     # end
 #     #
 #     #   def valid_input?(coordinate)
 #     #     @player_board.valid_coordinate?(coordinate_1) && @player_board.cells["#{coordinate_1}"].empty?
