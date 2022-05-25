@@ -20,11 +20,7 @@ RSpec.describe Game do
     end
 
     it 'can set the computer ship on 3 random cells' do
-
-        expect(@game.computer_ship_placement).to eq(2)
-
+      expect(@game.computer_ship_placement).to eq(2)
     end
-
-
   end
 end

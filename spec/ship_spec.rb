@@ -2,7 +2,6 @@ require 'rspec'
 require './lib/ship'
 
 RSpec.describe Ship do
-  #added in before each method. Use @cruiser when calling cruiser instance variable in test file.
   before :each do
     @cruiser = Ship.new("Cruiser", 3)
   end
@@ -35,15 +34,11 @@ RSpec.describe Ship do
     @cruiser.hit
 
     expect(@cruiser.health).to eq(1)
-
     expect(@cruiser.sunk?).to be(false)
 
     @cruiser.hit
 
     expect(@cruiser.health).to eq(0)
-
     expect(@cruiser.sunk?).to be(true)
-
   end
-
 end

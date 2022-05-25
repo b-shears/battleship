@@ -1,5 +1,4 @@
 class Game
-
   attr_reader :player_board, :computer_board
 
   def initialize
@@ -7,6 +6,11 @@ class Game
     @computer_board = Board.new
     @cruiser = Ship.new("Cruiser", 3)
     @submarine = Ship.new("Submarine", 2)
+    @comp_cruiser = Ship.new("Cruiser", 3)
+    @comp_sub = Ship.new("Submarine", 2)
+
+    @player_alive = true
+    @computer_alive = true
   end
 
   def start
@@ -20,6 +24,7 @@ class Game
     puts `clear`
     puts "You selected #{input}. Walk the Plank!"
 
+
   elsif input == "p"
     puts `clear`
     puts "Game On!"
@@ -27,32 +32,39 @@ class Game
     computer_ship_placement
     player_ship_placement
 
-    #turns, loop until win (later)
-    display
-    player_shot
-    computer_shot
-    display
-    # ish works up to this point
+    until @computer_alive == false || @player_alive == false do
+      display
+      player_shot
+      computer_shot
+      display
+      end
+    end
+
+    game_over
+
+    puts "Would you like to stay and play? Y for yes, N for no"
+    repeat_input = gets.chomp.upcase
+    if repeat_input == "Y"
+      start
     end
   end
 
   def computer_ship_placement
+    comp_coord_selection = @computer_board.cells.keys.sample(@comp_cruiser.length)
 
-    x = @computer_board.cells.keys.sample(@cruiser.length)
-
-    until @computer_board.valid_placement?(@cruiser, x) == true do
-      x = @computer_board.cells.keys.sample(@cruiser.length)
+    until @computer_board.valid_placement?(@comp_cruiser, comp_coord_selection) == true do
+      comp_coord_selection = @computer_board.cells.keys.sample(@comp_cruiser.length)
     end
 
-    @computer_board.place(@cruiser, x)
+    @computer_board.place(@comp_cruiser, comp_coord_selection)
 
-    x = @computer_board.cells.keys.sample(@submarine.length)
+    comp_coord_selection = @computer_board.cells.keys.sample(@comp_sub.length)
 
-    until @computer_board.valid_placement?(@submarine, x) == true do
-      x = @computer_board.cells.keys.sample(@submarine.length)
+    until @computer_board.valid_placement?(@comp_sub, comp_coord_selection) == true do
+      comp_coord_selection = @computer_board.cells.keys.sample(@comp_sub.length)
     end
 
-    @computer_board.place(@submarine, x)
+    @computer_board.place(@comp_sub, comp_coord_selection)
   end
 
   def player_ship_placement
@@ -62,32 +74,33 @@ class Game
     puts @player_board.render
     puts "Enter the squares for the Cruiser (3 spaces):"
     puts '>'
-    x = gets.chomp.upcase.split
+    player_coord_selection = gets.chomp.upcase.split
 
-    until @player_board.valid_coordinate?(x[0]) && @player_board.valid_coordinate?(x[1]) && @player_board.valid_coordinate?(x[2]) && @player_board.valid_placement?(@cruiser, x)
+    until @player_board.valid_coordinate?(player_coord_selection[0]) && @player_board.valid_coordinate?(player_coord_selection[1]) && @player_board.valid_coordinate?(player_coord_selection[2]) && @player_board.valid_placement?(@cruiser, player_coord_selection)
       puts "Those are invalid coordinates. Please try again:"
-      x = gets.chomp.upcase.split
+      player_coord_selection = gets.chomp.upcase.split
     end
 
-    @player_board.place(@cruiser, x)
+    @player_board.place(@cruiser, player_coord_selection)
     puts @player_board.render(true)
 
     puts "Enter the squares for the Submarine (2 spaces):"
-    y = gets.chomp.upcase.split
+    player_coord_selection = gets.chomp.upcase.split
 
-    until @player_board.valid_coordinate?(y[0]) && @player_board.valid_coordinate?(y[1]) && @player_board.valid_placement?(@submarine, y)
+    until @player_board.valid_coordinate?(player_coord_selection[0]) && @player_board.valid_coordinate?(player_coord_selection[1]) && @player_board.valid_placement?(@submarine, player_coord_selection)
       puts "Those are invalid coordinates. Please try again:"
-      y = gets.chomp.upcase.split
+      player_coord_selection = gets.chomp.upcase.split
     end
 
-    @player_board.place(@submarine, y)
+    @player_board.place(@submarine, player_coord_selection)
     puts @player_board.render(true)
     puts `clear`
   end
 
   def display
+    puts `clear`
     puts "=============COMPUTER BOARD============="
-    puts @computer_board.render
+    puts @computer_board.render(true)
     puts "==============PLAYER BOARD=============="
     puts @player_board.render(true)
   end
@@ -96,15 +109,27 @@ class Game
     puts "Enter the coordinate for your shot:"
     coordinate = gets.chomp.upcase
 
-    # until #valid coord
+    until @computer_board.valid_coordinate?(coordinate)
+      puts "Please enter a valid coordinate:"
+      coordinate = gets.chomp.upcase
+    end
+
+    cell = @computer_board.cells[coordinate]
+    ship = cell.ship
     @computer_board.cells[coordinate].fire_upon
-    if @player_board.cells[coordinate].empty?
+    answer = ""
+    if @computer_board.cells[coordinate].empty?
       answer = "miss"
     else
       answer = "hit"
     end
 
+    if @comp_cruiser.sunk? && @comp_sub.sunk?
+      @computer_alive = false
+    end
+
     puts "Your shot on #{coordinate} was a #{answer}."
+
     sleep(3)
     puts `clear`
   end
@@ -122,10 +147,31 @@ class Game
       answer = "hit"
     end
 
-    puts `clear`
-    puts "My shot on #{coordinate} was a #{answer}."
+    if @cruiser.sunk? && @submarine.sunk?
+      @player_alive = false
+    end
 
+    puts "My shot on #{coordinate} was a #{answer}."
   end
 
-end # <= this one ends the whole class
-#=====================================================================================================
+  def game_over
+    if @comp_cruiser.sunk? && @comp_sub.sunk?
+      puts "You won! You land-lubber, lily-livered, scallywag!"
+    end
+
+    if @cruiser.sunk? && @submarine.sunk?
+      puts "Go live with the bottom feeders! This is my sea now!"
+    end
+    @player_board = Board.new
+    @computer_board = Board.new
+    @cruiser = Ship.new("Cruiser", 3)
+    @submarine = Ship.new("Submarine", 2)
+    @comp_cruiser = Ship.new("Cruiser", 3)
+    @comp_sub = Ship.new("Submarine", 2)
+
+    @player_alive = true
+    @computer_alive = true
+
+    sleep(5)
+  end
+end
