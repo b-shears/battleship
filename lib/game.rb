@@ -37,8 +37,6 @@ class Game
       player_shot
       computer_shot
       display
-      # ish works up to this point
-
       end
     end
 
@@ -50,22 +48,21 @@ class Game
 
   def computer_ship_placement
 
-    x = @computer_board.cells.keys.sample(@comp_cruiser.length)
+    comp_coord_selection = @computer_board.cells.keys.sample(@comp_cruiser.length)
 
-    until @computer_board.valid_placement?(@comp_cruiser, x) == true do
-      x = @computer_board.cells.keys.sample(@comp_cruiser.length)
+    until @computer_board.valid_placement?(@comp_cruiser, comp_coord_selection) == true do
+      comp_coord_selection = @computer_board.cells.keys.sample(@comp_cruiser.length)
     end
 
-    @computer_board.place(@comp_cruiser, x)
-# require "pry"; binding.pry
+    @computer_board.place(@comp_cruiser, comp_coord_selection)
 
-    x = @computer_board.cells.keys.sample(@comp_sub.length)
+    comp_coord_selection = @computer_board.cells.keys.sample(@comp_sub.length)
 
-    until @computer_board.valid_placement?(@comp_sub, x) == true do
-      x = @computer_board.cells.keys.sample(@comp_sub.length)
+    until @computer_board.valid_placement?(@comp_sub, comp_coord_selection) == true do
+      comp_coord_selection = @computer_board.cells.keys.sample(@comp_sub.length)
     end
 
-    @computer_board.place(@comp_sub, x)
+    @computer_board.place(@comp_sub, comp_coord_selection)
   end
 
   def player_ship_placement
@@ -75,26 +72,25 @@ class Game
     puts @player_board.render
     puts "Enter the squares for the Cruiser (3 spaces):"
     puts '>'
-    x = gets.chomp.upcase.split
+    player_coord_selection = gets.chomp.upcase.split
 
-    until @player_board.valid_coordinate?(x[0]) && @player_board.valid_coordinate?(x[1]) && @player_board.valid_coordinate?(x[2]) && @player_board.valid_placement?(@cruiser, x)
+    until @player_board.valid_coordinate?(player_coord_selection[0]) && @player_board.valid_coordinate?(player_coord_selection[1]) && @player_board.valid_coordinate?(player_coord_selection[2]) && @player_board.valid_placement?(@cruiser, player_coord_selection)
       puts "Those are invalid coordinates. Please try again:"
-      x = gets.chomp.upcase.split
+      player_coord_selection = gets.chomp.upcase.split
     end
 
-    @player_board.place(@cruiser, x)
-    # require "pry"; binding.pry
+    @player_board.place(@cruiser, player_coord_selection)
     puts @player_board.render(true)
 
     puts "Enter the squares for the Submarine (2 spaces):"
-    y = gets.chomp.upcase.split
+    player_coord_selection = gets.chomp.upcase.split
 
-    until @player_board.valid_coordinate?(y[0]) && @player_board.valid_coordinate?(y[1]) && @player_board.valid_placement?(@submarine, y)
+    until @player_board.valid_coordinate?(player_coord_selection[0]) && @player_board.valid_coordinate?(player_coord_selection[1]) && @player_board.valid_placement?(@submarine, player_coord_selection)
       puts "Those are invalid coordinates. Please try again:"
-      y = gets.chomp.upcase.split
+      player_coord_selection = gets.chomp.upcase.split
     end
 
-    @player_board.place(@submarine, y)
+    @player_board.place(@submarine, player_coord_selection)
     puts @player_board.render(true)
     puts `clear`
   end
