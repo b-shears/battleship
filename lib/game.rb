@@ -10,6 +10,8 @@ class Game
     @comp_cruiser = Ship.new("Cruiser", 3)
     @comp_sub = Ship.new("Submarine", 2)
 
+    @player_alive = true
+    @computer_alive = true
   end
 
   def start
@@ -30,15 +32,22 @@ class Game
     computer_ship_placement
     player_ship_placement
 
-  while true  #turns, loop until win (later)
-    display
-    player_shot
-    computer_shot
-    display
-    # ish works up to this point
+    until @computer_alive == false || @player_alive == false do
+      display
+      player_shot
+      computer_shot
+      display
+      # ish works up to this point
+
+      end
     end
+
+    game_over
+
+    start
+
   end
-end
+
   def computer_ship_placement
 
     x = @computer_board.cells.keys.sample(@comp_cruiser.length)
@@ -102,6 +111,11 @@ end
     puts "Enter the coordinate for your shot:"
     coordinate = gets.chomp.upcase
 
+    until @computer_board.valid_coordinate?(coordinate)
+      puts "Please enter a valid coordinate:"
+      coordinate = gets.chomp.upcase
+    end
+
     cell = @computer_board.cells[coordinate]
     ship = cell.ship
     @computer_board.cells[coordinate].fire_upon
@@ -112,7 +126,12 @@ end
       answer = "hit"
     end
 
+    if @comp_cruiser.sunk? && @comp_sub.sunk?
+      @computer_alive = false
+    end
+
     puts "Your shot on #{coordinate} was a #{answer}."
+
     sleep(3)
     puts `clear`
   end
@@ -125,26 +144,40 @@ end
     @player_board.cells[coordinate].fire_upon
 
     if @player_board.cells[coordinate].empty?
-
       answer = "miss"
     else
       answer = "hit"
     end
 
-    puts `clear`
+    if @cruiser.sunk? && @submarine.sunk?
+      @player_alive = false
+    end
+
+    # puts `clear`
     puts "My shot on #{coordinate} was a #{answer}."
 
   end
 
   def game_over
 
-    until @comp_cruiser.sunk? && @comp_sub.sunk? do
-      "You won! You bilge-sucking, lily-livered, scallywag!"
+    if @comp_cruiser.sunk? && @comp_sub.sunk?
+      puts "You won! You land-lubber, lily-livered, scallywag!"
     end
 
-    until @cruiser.sunk? && @submarine.sunk? do
-      "Go live with the bottom feeders! This is my sea now!"
+    if @cruiser.sunk? && @submarine.sunk?
+      puts "Go live with the bottom feeders! This is my sea now!"
     end
+    @player_board = Board.new
+    @computer_board = Board.new
+    @cruiser = Ship.new("Cruiser", 3)
+    @submarine = Ship.new("Submarine", 2)
+    @comp_cruiser = Ship.new("Cruiser", 3)
+    @comp_sub = Ship.new("Submarine", 2)
+
+    @player_alive = true
+    @computer_alive = true
+
+    sleep(5)
   end
 
 end # <= this one ends the whole class
