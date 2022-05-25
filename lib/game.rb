@@ -100,7 +100,7 @@ class Game
   def display
     puts `clear`
     puts "=============COMPUTER BOARD============="
-    puts @computer_board.render(true)
+    puts @computer_board.render
     puts "==============PLAYER BOARD=============="
     puts @player_board.render(true)
   end
@@ -127,9 +127,7 @@ class Game
     if @comp_cruiser.sunk? && @comp_sub.sunk?
       @computer_alive = false
     end
-
     puts "Your shot on #{coordinate} was a #{answer}."
-
     sleep(3)
     puts `clear`
   end
@@ -150,7 +148,6 @@ class Game
     if @cruiser.sunk? && @submarine.sunk?
       @player_alive = false
     end
-
     puts "My shot on #{coordinate} was a #{answer}."
   end
 
@@ -168,10 +165,8 @@ class Game
     @submarine = Ship.new("Submarine", 2)
     @comp_cruiser = Ship.new("Cruiser", 3)
     @comp_sub = Ship.new("Submarine", 2)
-
     @player_alive = true
     @computer_alive = true
-
     sleep(5)
   end
 end
