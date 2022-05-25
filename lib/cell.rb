@@ -35,14 +35,15 @@ class Cell
     # return "." if display_ship == false
     if display_ship == true && empty? == false && @fired_upon == false
       "S"
-   elsif empty? && @fired_upon == true
+    elsif empty? && @fired_upon == true
       "M"
-    elsif empty? || @fired_upon == false
-      "."
-    elsif ship.sunk? == true
+    elsif @ship&.sunk? == true && @fired_upon == true
       "X"
-    else empty? == false && @fired_upon == true
+    elsif @fired_upon == true && !empty?
       "H"
+    else
+      "."
+
     # else
     #   "H"
     end
