@@ -43,9 +43,6 @@ class Board
   end
 
   def consecutive_coordinates(coordinates)
-    #numbers are consecutive and letters are all the same or
-    #letters are consecutive, numbers are the same
-    #numbers is array because of map
     letters = []
     numbers = []
 
@@ -54,34 +51,18 @@ class Board
       numbers << coordinate[-1].to_i
     end
 
-    if letters.uniq.length == 1 #letters are the same
-      #are numbers consecutive? returns true/false
+    if letters.uniq.length == 1
       number_consecutive = numbers.each_cons(2).all? do |a,b|
          a + 1 == b
       end
 
-    elsif numbers.uniq.length == 1 #numbers are same
+    elsif numbers.uniq.length == 1
       letter_consecutive = letters.each_cons(2).all? do |a,b|
         a + 1 == b
       end
-      else
-        false
-      end
-    #[1,2,4]
-    #each_cons gives us [[1,2][2,4]]
-    #first time through [1,2]
-    #[1, 2] true
-    #second time throuhg [2,4]
-    #[2, 4] false
-    #all? (looking at all true) true false
-
-    #[1,2,3]
-    #each_cons gives us [[1,2][2,3]]
-    #first time through [1,2]
-    #[1,2] true
-    #second time through [2,3]
-    #[2,3] true
-    #all? true true is yes
+    else
+      false
+    end
   end
 
   def overlapping_ships?(ship, coordinates)
@@ -112,7 +93,6 @@ class Board
     end
 
     board_rendering << " \n"
-
     board_rendering.join
 
     #another way
@@ -123,5 +103,4 @@ class Board
     # "C #{@cells["C1"].render(display)} #{@cells["C2"].render(display)} #{@cells["C3"].render(display)} #{@cells["C4"].render(display)}" +
     # "D #{@cells["D1"].render(display)} #{@cells["D2"].render(display)} #{@cells["D3"].render(display)} #{@cells["D4"].render(display)}"
   end
-
 end

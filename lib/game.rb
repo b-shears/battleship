@@ -1,5 +1,4 @@
 class Game
-
   attr_reader :player_board, :computer_board
 
   def initialize
@@ -43,11 +42,9 @@ class Game
     game_over
 
     start
-
   end
 
   def computer_ship_placement
-
     comp_coord_selection = @computer_board.cells.keys.sample(@comp_cruiser.length)
 
     until @computer_board.valid_placement?(@comp_cruiser, comp_coord_selection) == true do
@@ -149,13 +146,10 @@ class Game
       @player_alive = false
     end
 
-    # puts `clear`
     puts "My shot on #{coordinate} was a #{answer}."
-
   end
 
   def game_over
-
     if @comp_cruiser.sunk? && @comp_sub.sunk?
       puts "You won! You land-lubber, lily-livered, scallywag!"
     end
@@ -175,6 +169,4 @@ class Game
 
     sleep(5)
   end
-
-end # <= this one ends the whole class
-#=====================================================================================================
+end
