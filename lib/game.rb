@@ -24,6 +24,7 @@ class Game
     puts `clear`
     puts "You selected #{input}. Walk the Plank!"
 
+
   elsif input == "p"
     puts `clear`
     puts "Game On!"
@@ -41,7 +42,11 @@ class Game
 
     game_over
 
-    start
+    puts "Would you like to stay and play? Y for yes, N for no"
+    repeat_input = gets.chomp.upcase
+    if repeat_input == "Y"
+      start
+    end
   end
 
   def computer_ship_placement
